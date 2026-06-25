@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ASOBI MAKERS — あそぶ・さんか・つくる</title>
+  <title>ASOBI CREATE PARK — あつまる・つくる・あそぶ</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
@@ -47,7 +47,7 @@
     .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
     .event-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: var(--card-shadow); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
     .event-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
-    .card-header { padding: 20px 20px 12px; }
+    .card-header { padding: 20px 20px 12px; position: relative; }
     .card-category { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 10px; margin-bottom: 10px; }
     .card-title { font-size: 17px; font-weight: 800; line-height: 1.4; margin-bottom: 6px; }
     .card-organizer { font-size: 12px; color: var(--gray); font-weight: 600; }
@@ -130,13 +130,13 @@
 <header>
   <div class="header-top">
     <div class="logo">
-      <div class="logo-main">ASOBI <span>MAKERS</span></div>
-      <div class="logo-sub">あそぶ · さんか · つくる</div>
+      <div class="logo-main">ASOBI <span>CREATE PARK</span></div>
+      <div class="logo-sub">あつまる · つくる · あそぶ</div>
     </div>
     <button class="header-cta" onclick="openRegisterModal()">イベントを登録する</button>
   </div>
   <div class="hero">
-    <div class="hero-tag">PLAY · PARTICIPATE · CREATE</div>
+    <div class="hero-tag">PLAY · CREATE · CONNECT</div>
     <h1>受け手じゃなく、<br><em>自ら仕掛ける人</em>になろう</h1>
     <p>地域のイベントを発見して、参加して、一緒につくる。<br>おやじの会・まち道楽・カヌー部・にぎわいプロジェクト…<br>あなたの街のMAKERSがここにいる。</p>
     <div class="hero-keywords">
@@ -178,7 +178,7 @@
 </div>
 
 <footer>
-  <strong>ASOBI MAKERS</strong> — あそぶ・さんか・つくる<br>
+  <strong>ASOBI CREATE PARK</strong> — あつまる・つくる・あそぶ<br>
   地域の仕掛け人たちが集まる場所
 </footer>
 
