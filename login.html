@@ -75,7 +75,7 @@
 
     .dash-header { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 16px; }
     .dash-org-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-    .dash-org-icon { width: 56px; height: 56px; background: linear-gradient(to bottom, #87CEEB 45%, #4CAF78 45%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); overflow: hidden; }
+    .dash-org-icon { width: 56px; height: 56px; background: linear-gradient(to bottom, #87CEEB 45%, #4CAF78 45%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); overflow: hidden; cursor: pointer; }
     .dash-org-icon-wrap { position: relative; flex-shrink: 0; cursor: pointer; }
     .dash-org-icon-wrap:hover .logo-cam-badge { background: var(--green); }
     .logo-cam-badge { position: absolute; bottom: -2px; right: -2px; width: 22px; height: 22px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.25); transition: background 0.2s; border: 1.5px solid white; }
@@ -98,7 +98,7 @@
     .dash-empty { text-align: center; padding: 48px 20px; color: var(--gray); font-size: 14px; line-height: 2; }
 
     .event-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-    .event-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border: 1.5px solid transparent; transition: all 0.2s; }
+    .event-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border: 1.5px solid transparent; transition: all 0.2s; cursor: pointer; }
     .event-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
     .event-card-img { height: 80px; background: linear-gradient(135deg, #E8F5E9, #C8E6C9); display: flex; align-items: center; justify-content: center; font-size: 36px; overflow: hidden; }
     .event-card-img img { width: 100%; height: 100%; object-fit: cover; }
@@ -149,7 +149,7 @@
     .logo-preview { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; display: none; margin: 0 auto 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
     .logo-preview.has-img { display: block; }
     .upload-progress { font-size: 12px; color: var(--green); font-weight: 700; text-align: center; margin-top: 6px; display: none; }
-    .dash-org-logo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .dash-org-logo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
 
     @media (max-width: 520px) {
       .event-cards { grid-template-columns: 1fr; }
@@ -232,7 +232,7 @@
     <button class="btn-secondary" onclick="showPhase('phase1')">← ログイン画面に戻る</button>
   </div>
 
-  <!-- PHASE 4: ダッシュボード -->
+  <!-- PHASE 4: ダッシュボード（A+B型） -->
   <div class="dashboard-full phase" id="phase4">
     <div class="dash-header">
       <div class="dash-org-row">
@@ -289,21 +289,21 @@
     <div class="register-form">
       <div class="form-group">
         <label class="form-label">イベント画像</label>
-        <div class="img-upload-area">
+        <div class="img-upload-area" id="event-img-area">
           <input type="file" id="event_image_file" accept="image/*" onchange="previewEventImage(this)">
           <img id="event_img_preview" class="img-preview" src="" alt="">
           <div id="event-img-placeholder"><div class="img-upload-icon">🖼️</div><div class="img-upload-label">タップして画像を選択（JPEG/PNG、5MBまで）</div></div>
         </div>
         <div id="event-img-progress" class="upload-progress">📤 アップロード中...</div>
       </div>
-      <div class="form-group"><label class="form-label">イベント名 <span class="required">*</span></label><input type="text" id="ev_title" class="form-input" placeholder="例：親子で遺ぶ自然体験"></div>
+      <div class="form-group"><label class="form-label">イベント名 <span class="required">*</span></label><input type="text" id="ev_title" class="form-input" placeholder="例：親子で遪ぶ自然体験"></div>
       <div class="form-group"><label class="form-label">開催日</label><input type="date" id="ev_event_date" class="form-input"></div>
       <div class="form-group"><label class="form-label">開催場所</label><input type="text" id="ev_location" class="form-input" placeholder="例：世田谷公園"></div>
       <div class="form-group"><label class="form-label">対象年齢・人数</label><input type="text" id="ev_target" class="form-input" placeholder="例：3～10歳、20名程度"></div>
       <div class="form-group"><label class="form-label">イベント説明</label><textarea id="ev_description" class="form-input" rows="4" placeholder="どんなイベントですか？"></textarea></div>
       <div class="form-group"><label class="form-label">参加費</label><input type="text" id="ev_price" class="form-input" placeholder="例：無料、500円/人"></div>
       <div id="ev_error" style="color:#C62828;font-size:13px;margin-bottom:10px;text-align:center;display:none;"></div>
-      <button class="btn-line" id="ev_submit_btn" onclick="saveEvent()">🌱 イベントを公開する</button>
+      <button class="btn-line" id="ev_submit_btn" onclick="saveEvent()" style="margin-top:4px">🌱 イベントを公開する</button>
     </div>
   </div>
 
@@ -312,7 +312,7 @@
 <!-- ロゴ直接アップロード用 -->
 <input type="file" id="direct_logo_input" accept="image/*" style="display:none" onchange="handleDirectLogoSelect(this)">
 
-<!-- Google風切り抜きオーバーレイ -->
+<!-- 切り抜きオーバーレイ -->
 <div id="crop-overlay" style="position:fixed;inset:0;background:#111;z-index:9999;display:none;flex-direction:column;">
   <div style="display:flex;align-items:center;padding:14px 16px;flex-shrink:0;">
     <button onclick="closeCropOverlay()" style="background:none;border:none;color:white;font-size:26px;cursor:pointer;line-height:1;padding:0 8px 0 0;">←</button>
@@ -329,12 +329,12 @@
       </svg>
     </div>
   </div>
-  <div style="padding:20px 16px 36px;background:#111;display:flex;flex-direction:column;align-items:center;gap:16px;flex-shrink:0;">
+  <div style="padding:20px 16px 32px;background:#111;display:flex;flex-direction:column;align-items:center;gap:16px;flex-shrink:0;">
     <div onclick="rotateCropImg()" style="cursor:pointer;color:white;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;">
       <div style="font-size:28px;">↻</div>
       <div style="font-size:12px;letter-spacing:0.05em;">回転</div>
     </div>
-    <button onclick="confirmCrop()" id="crop-confirm-btn" style="width:100%;max-width:320px;background:#1a73e8;color:white;border:none;padding:15px;border-radius:28px;font-size:15px;font-weight:800;cursor:pointer;">次へ</button>
+    <button onclick="confirmCrop()" id="crop-confirm-btn" style="width:100%;max-width:320px;background:#1a73e8;color:white;border:none;padding:15px;border-radius:28px;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:0.03em;">次へ</button>
   </div>
 </div>
 
@@ -416,8 +416,9 @@
   }
 
   async function showDashboard(org, lineName) {
-    document.getElementById('dashOrg').textContent = org?.org_name||'団体名未設定';
-    document.getElementById('dashWelcome').textContent = `${lineName||org?.org_name||''} さん、おかえりなさい 🌿`;
+    const name = lineName || org?.org_name || '';
+    document.getElementById('dashOrg').textContent = org?.org_name || '団体名未設定';
+    document.getElementById('dashWelcome').textContent = `${name} さん、おかえりなさい 🌿`;
     const iconEl = document.getElementById('dashOrgIcon');
     if (iconEl) {
       if (org?.logo_url) {
@@ -439,20 +440,20 @@
   }
 
   function handleDirectLogoSelect(input) {
-    if (!input.files||!input.files[0]) return;
+    if (!input.files || !input.files[0]) return;
     _cropRotation = 0;
     const reader = new FileReader();
     reader.onload = e => {
       const img = document.getElementById('crop-img');
+      img.onload = () => { img.style.transform = 'rotate(0deg)'; };
       img.src = e.target.result;
-      img.style.transform = 'rotate(0deg)';
       document.getElementById('crop-overlay').style.display = 'flex';
     };
     reader.readAsDataURL(input.files[0]);
   }
 
   function rotateCropImg() {
-    _cropRotation = (_cropRotation+90)%360;
+    _cropRotation = (_cropRotation + 90) % 360;
     document.getElementById('crop-img').style.transform = `rotate(${_cropRotation}deg)`;
   }
 
@@ -465,47 +466,49 @@
   async function confirmCrop() {
     const img = document.getElementById('crop-img');
     const btn = document.getElementById('crop-confirm-btn');
-    btn.disabled=true; btn.textContent='アップロード中...';
+    btn.disabled = true;
+    btn.textContent = 'アップロード中...';
     const size = 400;
     const canvas = document.createElement('canvas');
-    canvas.width=size; canvas.height=size;
+    canvas.width = size; canvas.height = size;
     const ctx = canvas.getContext('2d');
     ctx.beginPath();
-    ctx.arc(size/2,size/2,size/2,0,Math.PI*2);
+    ctx.arc(size/2, size/2, size/2, 0, Math.PI*2);
     ctx.clip();
     ctx.save();
-    ctx.translate(size/2,size/2);
-    ctx.rotate(_cropRotation*Math.PI/180);
-    const nw=img.naturalWidth, nh=img.naturalHeight;
-    const sc=size/Math.min(nw,nh);
-    ctx.drawImage(img,-nw*sc/2,-nh*sc/2,nw*sc,nh*sc);
+    ctx.translate(size/2, size/2);
+    ctx.rotate(_cropRotation * Math.PI / 180);
+    const nw = img.naturalWidth, nh = img.naturalHeight;
+    const minD = Math.min(nw, nh);
+    const sc = size / minD;
+    ctx.drawImage(img, -nw*sc/2, -nh*sc/2, nw*sc, nh*sc);
     ctx.restore();
     canvas.toBlob(async blob => {
-      const org = JSON.parse(sessionStorage.getItem('acp_org')||'{}');
+      const org = JSON.parse(sessionStorage.getItem('acp_org') || '{}');
       if (!org.id) { closeCropOverlay(); btn.disabled=false; btn.textContent='次へ'; return; }
       const iconEl = document.getElementById('dashOrgIcon');
       closeCropOverlay();
-      if (iconEl) iconEl.innerHTML='<div style="font-size:20px;animation:spin 1s linear infinite">⚙️</div>';
+      if (iconEl) iconEl.innerHTML = '<div style="font-size:20px;animation:spin 1s linear infinite">⚙️</div>';
       try {
         const path = `organizations/${org.id}/logo_${Date.now()}.jpg`;
         const logo_url = await uploadImage(blob, path);
         const res = await fetch(`${SUPABASE_URL}/rest/v1/organizations?id=eq.${org.id}`, {
-          method:'PATCH',
-          headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`,'Prefer':'return=representation'},
-          body:JSON.stringify({logo_url})
+          method: 'PATCH',
+          headers: { 'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`,'Prefer':'return=representation' },
+          body: JSON.stringify({ logo_url })
         });
         if (res.ok) {
-          const [updated]=await res.json();
-          const newOrg={...org,...updated};
-          sessionStorage.setItem('acp_org',JSON.stringify(newOrg));
-          if (iconEl) iconEl.innerHTML=`<img src="${escHtml(logo_url)}" class="dash-org-logo" alt="ロゴ">`;
+          const [updated] = await res.json();
+          const newOrg = { ...org, ...updated };
+          sessionStorage.setItem('acp_org', JSON.stringify(newOrg));
+          if (iconEl) iconEl.innerHTML = `<img src="${escHtml(logo_url)}" class="dash-org-logo" alt="ロゴ">`;
         } else { throw new Error('保存に失敗しました'); }
       } catch(e) {
-        alert('アップロードに失敗: '+e.message);
-        if(iconEl) iconEl.innerHTML=makeLandscapeIcon();
+        alert('アップロードに失敗しました: ' + e.message);
+        if (iconEl) iconEl.innerHTML = makeLandscapeIcon();
       }
-      btn.disabled=false; btn.textContent='次へ';
-    },'image/jpeg',0.92);
+      btn.disabled = false; btn.textContent = '次へ';
+    }, 'image/jpeg', 0.92);
   }
 
   async function loadDashboard(org) {
@@ -593,7 +596,7 @@
       <div id="orginfo-save-msg" class="orginfo-save-msg">✅ 保存しました！</div>
       <div class="orginfo-edit-actions">
         <button class="btn-save" id="orginfo-save-btn" onclick="saveOrgInfo()">💾 保存する</button>
-        <button class="btn-cancel" onclick="renderOrgInfo(JSON.parse(sessionStorage.getItem('acp_org')||'{}'))」キャンセル</button>
+        <button class="btn-cancel" onclick="renderOrgInfo(JSON.parse(sessionStorage.getItem('acp_org')||'{}'))">キャンセル</button>
       </div>
     </div>`;
   }
